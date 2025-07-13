@@ -2,10 +2,6 @@
 
 namespace App\Providers;
 
-use App\Http\Middleware\InitializeTenancyFromSession;
-use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-
+        //
     }
 }

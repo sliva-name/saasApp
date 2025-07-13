@@ -4,12 +4,8 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Pages;
 
-use App\Models\Product;
-use App\Models\Store;
 use MoonShine\Laravel\Pages\Page;
 use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\UI\Components\Metrics\Wrapped\ValueMetric;
-
 #[\MoonShine\MenuManager\Attributes\SkipMenu]
 
 class Dashboard extends Page
@@ -34,6 +30,6 @@ class Dashboard extends Page
      */
     protected function components(): iterable
 	{
-        return [];
+		return [];
 	}
 }

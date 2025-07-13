@@ -57,13 +57,13 @@ return [
     // Storage
     'disk' => 'public',
     'disk_options' => [],
-    'cache' => 'session',
+    'cache' => 'file',
 
     // Authentication and profile
     'auth' => [
         'enabled' => true,
         'guard' => 'moonshine',
-        'model' => \App\Models\User::class,
+        'model' => MoonshineUser::class,
         'middleware' => Authenticate::class,
         'pipelines' => [],
     ],

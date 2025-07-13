@@ -7,10 +7,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/test-session', function () {
-    session(['foo' => 'bar']);
-    return session('foo'); // должен вернуть 'bar'
-});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/stores/create', [StoreController::class, 'create'])->name('stores.create');
@@ -29,4 +25,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-require __DIR__.'/tenant.php';
