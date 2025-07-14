@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use MoonShine\Laravel\DependencyInjection\MoonShine;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
@@ -25,6 +26,8 @@ Route::middleware([
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
+
     Route::get('/', [HomeController::class, 'index'])->name('store.home');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('store.products.show');
+    require __DIR__.'/auth.php';
 });

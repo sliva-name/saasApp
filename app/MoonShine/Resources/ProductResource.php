@@ -7,6 +7,7 @@ namespace App\MoonShine\Resources;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
 
+use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
@@ -22,9 +23,11 @@ use MoonShine\UI\Fields\Textarea;
  */
 class ProductResource extends ModelResource
 {
+
     protected string $model = Product::class;
 
     protected string $title = 'Products';
+
 
     /**
      * @return list<FieldContract>
