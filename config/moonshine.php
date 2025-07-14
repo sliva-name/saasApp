@@ -18,6 +18,8 @@ use MoonShine\Laravel\Pages\Dashboard;
 use MoonShine\Laravel\Pages\ErrorPage;
 use MoonShine\Laravel\Pages\LoginPage;
 use MoonShine\Laravel\Pages\ProfilePage;
+use Stancl\Tenancy\Middleware\InitializeTenancyBySubdomain;
+
 
 return [
     'title' => env('MOONSHINE_TITLE', 'MoonShine'),
@@ -52,6 +54,7 @@ return [
         VerifyCsrfToken::class,
         SubstituteBindings::class,
         ChangeLocale::class,
+        Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class
     ],
 
     // Storage
@@ -63,7 +66,7 @@ return [
     'auth' => [
         'enabled' => true,
         'guard' => 'moonshine',
-        'model' => MoonshineUser::class,
+        'model' => \App\Models\User::class,
         'middleware' => Authenticate::class,
         'pipelines' => [],
     ],
@@ -72,8 +75,6 @@ return [
     'user_fields' => [
         'username' => 'email',
         'password' => 'password',
-        'name' => 'name',
-        'avatar' => 'avatar',
     ],
 
     // Layout, pages, forms

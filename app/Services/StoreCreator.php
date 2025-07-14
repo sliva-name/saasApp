@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\Store;
 use App\Models\User;
 use Illuminate\Support\Str;
-use Stancl\Tenancy\Database\Models\Domain;
 
 class StoreCreator
 {

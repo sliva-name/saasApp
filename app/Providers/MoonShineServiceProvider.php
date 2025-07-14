@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Store;
+use App\MoonShine\Resources\CategoryResource;
+use App\MoonShine\Resources\ProductResource;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\Contracts\Core\DependencyInjection\ConfiguratorContract;
 use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
@@ -25,10 +28,16 @@ class MoonShineServiceProvider extends ServiceProvider
             ->resources([
                 MoonShineUserResource::class,
                 MoonShineUserRoleResource::class,
+                CategoryResource::class,
+                ProductResource::class
             ])
             ->pages([
                 ...$config->getPages(),
-            ])
+            ]);
+        $config
+            ->userField('username', 'email')
+            ->userField('password', 'password')
+            ->userField('name', 'name')
         ;
     }
 }
