@@ -32,7 +32,8 @@ class Product extends Model implements HasMedia
     }
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('image');
+        $this->addMediaCollection('image')
+            ->useDisk('public');;
     }
 
     public function category(): BelongsTo
