@@ -17,7 +17,7 @@ class StoreController extends Controller
     {
         $request->validate([
             'plan' => 'required|in:free,basic,pro',
-            'custom_domain' => 'nullable|string|regex:/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
+            'custom_domain' => 'nullable|string|regex:/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/|unique:domains,domain|max:50',
             'theme_id' => ['nullable', 'integer', 'exists:themes,id'],
         ]);
 
@@ -29,7 +29,15 @@ class StoreController extends Controller
     }
     public function show(Store $store)
     {
-        $domain = $store->domains()->first()?->domain;
-        return view('stores.show', compact('store', 'domain'));
+        $stores = Store::with(['owner', 'theme', 'domains'])
+            ->orderByDesc('created_at')
+            ->paginate(10);
+        return view('stores.show', compact('stores'));
+    }
+    public function index(Request $request)
+    {
+
+
+        return view('stores.index', compact('stores'));
     }
 }

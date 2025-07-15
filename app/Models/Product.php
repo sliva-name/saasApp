@@ -21,12 +21,18 @@ class Product extends Model implements HasMedia
         'stock',
         'category_id',
     ];
-
+    protected $casts = [
+        'attributes' => 'array',
+    ];
     protected static function booted()
     {
         static::creating(function ($product) {
             $product->slug = Str::slug($product->name);
         });
+    }
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('image');
     }
 
     public function category(): BelongsTo

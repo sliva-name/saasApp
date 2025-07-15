@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('subscription_plan')->default('free');
             $table->boolean('is_blocked')->default(false);
             $table->timestamp('email_verified_at')->nullable();
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

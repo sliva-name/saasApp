@@ -12,7 +12,6 @@ class Store extends BaseTenant implements TenantWithDatabase
 {
     use HasDatabase, HasDomains;
 
-    // При необходимости можно задать custom columns, например slug, theme_id
     public static function getCustomColumns(): array
     {
         return array_merge(parent::getCustomColumns(), [
@@ -23,8 +22,7 @@ class Store extends BaseTenant implements TenantWithDatabase
         ]);
     }
 
-
-    public function user(): BelongsTo
+    public function owner(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

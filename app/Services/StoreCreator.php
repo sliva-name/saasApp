@@ -37,6 +37,6 @@ class StoreCreator
     {
         $slug ??= $this->generateSlug($user);
 
-        return "{$slug}.saas-app.localhost";
+        return "{$slug}.localhost"; //TODO Переделать бы надо
     }
 }

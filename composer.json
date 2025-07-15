@@ -17,6 +17,7 @@
         "spatie/laravel-medialibrary": "^11.13",
         "spatie/laravel-permission": "^6.20",
         "stancl/tenancy": "^3.9",
+        "visual-ideas/moonshine-spatie-medialibrary": "^3.0",
         "webmatherfacker/moonshine-carousel": "^2.0"
     },
     "require-dev": {

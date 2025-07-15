@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
 
-use MoonShine\Contracts\Core\DependencyInjection\CoreContract;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
@@ -17,6 +15,7 @@ use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
+use VI\MoonShineSpatieMediaLibrary\Fields\MediaLibrary;
 
 /**
  * @extends ModelResource<Product>
@@ -49,6 +48,7 @@ class ProductResource extends ModelResource
                 ID::make(),
                 Text::make('Название', 'name')->required(),
                 Textarea::make('Описание', 'description'),
+                MediaLibrary::make('Галерея', 'image'),
                 Number::make('Цена', 'price')->min(0)->step(0.01)->required(),
                 Number::make('Остаток на складе', 'stock')->min(0),
                 BelongsTo::make('Категория', 'category', resource: CategoryResource::class)->nullable(),

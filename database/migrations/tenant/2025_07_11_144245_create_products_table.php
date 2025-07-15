@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('stock')->default(0);
             $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
             $table->string('slug')->unique();
+            $table->json('attributes')->nullable(); // для гибких характеристик (цвет, размер и т.п.)
             $table->softDeletes();
             $table->timestamps();
         });

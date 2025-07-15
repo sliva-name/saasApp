@@ -9,9 +9,9 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements HasMedia
+class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles, SoftDeletes, InteractsWithMedia;
+    use HasFactory, Notifiable, HasRoles;
 
     protected $fillable = [
         'name',
@@ -33,7 +33,7 @@ class User extends Authenticatable implements HasMedia
         ];
     }
 
-    public function subscriptions()
+    public function subscriptions(): User|\Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Subscription::class);
     }
@@ -43,7 +43,7 @@ class User extends Authenticatable implements HasMedia
         return $this->hasOne(Subscription::class)->where('is_active', true);
     }
 
-    public function isSuperAdmin()
+    public function isSuperAdmin(): User|bool
     {
         return $this->hasRole('super-admin');
     }

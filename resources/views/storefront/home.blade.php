@@ -4,7 +4,7 @@
 
 @section('content')
     <h2 class="text-2xl font-bold mb-4">Товары</h2>
-    @empty($products)
+    @if($products)
         <div class="my-5 block rounded-lg">
             <h3 class="text-xl font-semibold tracking-tight text-balance text-gray-900 sm:text-xl">
                 Товаров пока нет
@@ -24,6 +24,6 @@
         <div class="mt-6">
             {{ $products->links() }}
         </div>
-    @endempty
+    @endif
 
 @endsection
