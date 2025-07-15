@@ -1,27 +1,30 @@
 <?php
 
 namespace App\Models;
-
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticate implements HasMedia
 {
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, SoftDeletes, InteractsWithMedia;
+
     protected $fillable = [
         'name',
         'email',
         'password',
-        'tenant_id'
+        'tenant_id',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
     ];
+
     protected function casts(): array
     {
         return [
@@ -29,6 +32,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);
@@ -42,5 +46,13 @@ class User extends Authenticatable
     public function isSuperAdmin()
     {
         return $this->hasRole('super-admin');
+    }
+
+    public function registerMediaConversions(Media|\Spatie\MediaLibrary\MediaCollections\Models\Media $media = null): void
+    {
+        $this->addMediaConversion('avatar_thumb')
+            ->width(100)
+            ->height(100)
+            ->sharpen(10);
     }
 }

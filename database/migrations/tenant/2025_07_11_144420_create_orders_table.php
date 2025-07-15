@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete(); // пользователь, оформивший заказ
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->decimal('total', 10, 2)->default(0);
-            $table->string('status')->default('pending'); // e.g., pending, paid, shipped, cancelled
+            $table->string('status')->default('pending');
+            $table->string('payment_method')->nullable();
+            $table->string('shipping_address')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

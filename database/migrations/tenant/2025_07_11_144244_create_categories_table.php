@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('parent_id')->nullable()->constrained('categories')->nullOnDelete();
+            $table->string('slug')->unique();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

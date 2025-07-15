@@ -4,18 +4,30 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Stancl\Tenancy\Database\Concerns\HasDomains;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Product extends Model
+class Product extends Model implements HasMedia
 {
-    use HasDomains;
+    use InteractsWithMedia, SoftDeletes;
+
     protected $fillable = [
         'name',
+        'slug',
         'description',
         'price',
         'stock',
         'category_id',
     ];
+
+    protected static function booted()
+    {
+        static::creating(function ($product) {
+            $product->slug = Str::slug($product->name);
+        });
+    }
 
     public function category(): BelongsTo
     {
