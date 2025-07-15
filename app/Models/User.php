@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Auth\Middleware\Authenticate;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
@@ -9,7 +9,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticate implements HasMedia
+class User extends Authenticatable implements HasMedia
 {
     use HasFactory, Notifiable, HasRoles, SoftDeletes, InteractsWithMedia;
 
