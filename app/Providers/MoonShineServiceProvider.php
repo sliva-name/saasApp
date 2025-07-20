@@ -14,6 +14,7 @@ use MoonShine\Laravel\DependencyInjection\MoonShine;
 use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
 use App\MoonShine\Resources\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRoleResource;
+use App\MoonShine\Pages\CategoryTreePage;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -29,10 +30,11 @@ class MoonShineServiceProvider extends ServiceProvider
                 MoonShineUserResource::class,
                 MoonShineUserRoleResource::class,
                 CategoryResource::class,
-                ProductResource::class
+                ProductResource::class,
             ])
             ->pages([
                 ...$config->getPages(),
+                CategoryTreePage::class,
             ]);
         $config
             ->userField('username', 'email')

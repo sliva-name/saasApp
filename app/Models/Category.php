@@ -15,7 +15,8 @@ class Category extends Model
     protected $fillable = [
         'name',
         'slug',
-        'parent_id'
+        'parent_id',
+        'sorting'
     ];
 
     protected static function booted()
@@ -33,6 +34,11 @@ class Category extends Model
     public function children(): HasMany
     {
         return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    public function childrenRecursive()
+    {
+        return $this->children()->with('childrenRecursive');
     }
 
     public function products(): HasMany

@@ -33,6 +33,7 @@ use MoonShine\UI\Components\{Breadcrumbs,
     When};
 use MoonShine\Laravel\Resources\MoonShineUserRoleResource;
 use MoonShine\MenuManager\MenuItem;
+use App\MoonShine\Resources\CategoryResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -51,6 +52,7 @@ final class MoonShineLayout extends AppLayout
                 static fn () => 'Товары',
                 ProductResource::class
             ),
+            MenuItem::make('Categories', CategoryResource::class),
         ];
     }
 

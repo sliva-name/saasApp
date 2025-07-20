@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\TenantContext;
 use App\Models\Product;
 
 class HomeController extends Controller
