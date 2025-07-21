@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
@@ -26,7 +27,9 @@ Route::middleware([
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
 
-    Route::get('/', [HomeController::class, 'index'])->name('store.home');
+    Route::get('/', [SearchController::class, 'index'])->name('store.index');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('store.products.show');
+    Route::get('/search/suggest', [SearchController::class, 'suggest'])->name('store.suggest');
+    Route::get('/api/products', [SearchController::class, 'getProducts'])->name('products.get');
     require __DIR__.'/auth.php';
 });

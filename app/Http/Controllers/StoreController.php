@@ -34,10 +34,4 @@ class StoreController extends Controller
             ->paginate(10);
         return view('stores.show', compact('stores'));
     }
-    public function index(Request $request)
-    {
-
-
-        return view('stores.index', compact('stores'));
-    }
 }

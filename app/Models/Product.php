@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+use Laravel\Scout\Searchable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Product extends Model implements HasMedia
 {
-    use InteractsWithMedia, SoftDeletes;
+    use InteractsWithMedia, SoftDeletes, Searchable, HasFactory;
 
     protected $fillable = [
         'name',
@@ -24,6 +26,21 @@ class Product extends Model implements HasMedia
     protected $casts = [
         'attributes' => 'array',
     ];
+    /**
+     * Настройка данных для индексации в MeiliSearch
+     */
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'description' => $this->description,
+            'price' => (float) $this->price,
+            'stock' => $this->stock,
+            'category_id' => $this->category_id,
+            'image_url' => $this->getFirstMediaUrl('image'),
+        ];
+    }
     protected static function booted()
     {
         static::creating(function ($product) {
