@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-7xl mx-auto p-4">
+    <div class="mx-auto p-4">
         <SearchBar @search="onSearch" />
 
         <div class="flex flex-col lg:flex-row gap-8 mt-6">

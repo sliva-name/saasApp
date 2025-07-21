@@ -38,17 +38,22 @@ export default {
         }
     },
     methods: {
+        // Создаем отдельно функцию с debounce, чтобы можно было в ней эмитить
         onInput: debounce(function () {
+            this.$emit('search', this.query)  // Эмитим текущий текст запроса
+
             if (this.query.length < 2) {
                 this.suggestions = []
                 return
             }
+
             axios
                 .get('/search/suggest', { params: { q: this.query } })
                 .then(({ data }) => {
                     this.suggestions = data
                 })
         }, 300),
+
         selectSuggestion(item) {
             this.query = item.name
             this.suggestions = []

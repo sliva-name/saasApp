@@ -1,5 +1,5 @@
 <template>
-    <aside class="w-full lg:w-64 p-4 bg-white border border-gray-200 rounded-xl shadow-md">
+    <aside class="w-full lg:w-64 p-8 bg-white border border-gray-200 rounded-xl shadow-md">
         <h3 class="text-xl font-semibold mb-6 text-gray-900">Фильтры</h3>
 
         <div class="space-y-5">
