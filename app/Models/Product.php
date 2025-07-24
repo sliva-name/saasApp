@@ -34,6 +34,7 @@ class Product extends Model implements HasMedia
         return array_merge($this->toArray(),[
             'id' => (int) $this->id,
             'price' => (float) $this->price,
+            'image_url' => $this->getFirstMediaUrl('image'),
             'created_at' => $this->created_at->timestamp,
         ]);
     }

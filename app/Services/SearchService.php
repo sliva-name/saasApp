@@ -92,33 +92,35 @@ class SearchService
         $filters = [];
 
         foreach ($this->filters as $key => $value) {
-            if (str_ends_with($key, '_min')) {
-                $field = str_replace('_min', '', $key);
-                $filters[] = "{$field} >= {$value}";
-            } elseif (str_ends_with($key, '_max')) {
-                $field = str_replace('_max', '', $key);
-                $filters[] = "{$field} <= {$value}";
-            } elseif (str_ends_with($key, '_not_null')) {
-                $field = str_replace('_not_null', '', $key);
-                $filters[] = "{$field} IS NOT NULL";
-            } elseif (str_ends_with($key, '_null')) {
-                $field = str_replace('_null', '', $key);
-                $filters[] = "{$field} IS NULL";
-            } elseif (str_ends_with($key, '_in') && is_array($value)) {
-                $field = str_replace('_in', '', $key);
-                $inValues = implode(' OR ', array_map(fn($v) => "{$field} = " . $this->formatValue($v), $value));
-                $filters[] = '(' . $inValues . ')';
-            } elseif (str_ends_with($key, '_not_in') && is_array($value)) {
-                $field = str_replace('_not_in', '', $key);
-                $notInValues = implode(' AND ', array_map(fn($v) => "{$field} != " . $this->formatValue($v), $value));
-                $filters[] = '(' . $notInValues . ')';
-            } else {
-                $filters[] = "{$key} = " . $this->formatValue($value);
+            $filters[] = $this->parseFilter($key, $value);
+        }
+
+        return implode(' AND ', array_filter($filters));
+    }
+
+    /**
+     * Парсим строку фильтров MeiliSearch
+     */
+    protected function parseFilter(string $key, mixed $value): ?string
+    {
+        $patterns = [
+            '/^(.*)_min$/'      => fn($f, $v) => "{$f} >= " . $this->formatValue($v),
+            '/^(.*)_max$/'      => fn($f, $v) => "{$f} <= " . $this->formatValue($v),
+            '/^(.*)_not_null$/' => fn($f)     => "{$f} IS NOT NULL",
+            '/^(.*)_null$/'     => fn($f)     => "{$f} IS NULL",
+            '/^(.*)_in$/'       => fn($f, $v) => is_array($v) ? '(' . implode(' OR ', array_map(fn($val) => "{$f} = " . $this->formatValue($val), $v)) . ')' : null,
+            '/^(.*)_not_in$/'   => fn($f, $v) => is_array($v) ? '(' . implode(' AND ', array_map(fn($val) => "{$f} != " . $this->formatValue($val), $v)) . ')' : null,
+        ];
+
+        foreach ($patterns as $pattern => $callback) {
+            if (preg_match($pattern, $key, $matches)) {
+                return $callback($matches[1], $value);
             }
         }
 
-        return implode(' AND ', $filters);
+        return "{$key} = " . $this->formatValue($value);
     }
+
 
     /**
      * Экранирует значения фильтра

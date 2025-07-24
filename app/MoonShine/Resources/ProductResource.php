@@ -35,6 +35,12 @@ class ProductResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
+            Text::make('Название', 'name')->required(),
+            Textarea::make('Описание', 'description'),
+            MediaLibrary::make('Галерея', 'image')->multiple(),
+            Number::make('Цена', 'price')->min(0)->step(0.01)->required(),
+            Number::make('Остаток на складе', 'stock')->min(0),
+            BelongsTo::make('Категория', 'category', resource: CategoryResource::class)->nullable(),
         ];
     }
 
