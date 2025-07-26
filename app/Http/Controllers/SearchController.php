@@ -35,4 +35,27 @@ class SearchController extends Controller
         ]);
     }
 
+    public function getCategoryProducts(Request $request, string $slug, ProductSearchService $search)
+    {
+        $category = Category::where('slug', $slug)->firstOrFail();
+
+        // Вписываем category_id в Request для фильтрации
+        $request->merge([
+            'category_id' => $category->id,
+        ]);
+
+        $result = $search->search($request);
+
+        return response()->json([
+            'category' => [
+                'name' => $category->name,
+                'slug' => $category->slug,
+            ],
+            'products' => $result['hits'],
+            'pagination' => $result['pagination'],
+        ]);
+    }
+
+
+
 }

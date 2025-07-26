@@ -14,7 +14,7 @@ if ! grep -q 'APP_KEY=base64' .env && [ -f artisan ]; then
 fi
 
 echo "📦 Установка composer-пакетов..."
-composer install --no-dev --optimize-autoloader
+composer install
 
 if [ "$APP_ENV" = "local" ]; then
     echo "🎨 Запуск Vite dev-сервера..."

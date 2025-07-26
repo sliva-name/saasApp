@@ -35,6 +35,7 @@ class Product extends Model implements HasMedia
             'id' => (int) $this->id,
             'price' => (float) $this->price,
             'image_url' => $this->getFirstMediaUrl('image'),
+            'category_id' => $this->category_id,
             'created_at' => $this->created_at->timestamp,
         ]);
     }

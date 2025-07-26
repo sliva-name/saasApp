@@ -6,14 +6,18 @@
 
         <ul
             v-else
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
+            class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-6"
         >
             <li
                 v-for="product in products"
                 :key="product.id"
                 class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition"
             >
-                <div class="p-4">
+                <!-- ССЫЛКА НА ДЕТАЛЬНУЮ СТРАНИЦУ -->
+                <RouterLink
+                    :to="`/product/${product.slug}`"
+                    class="block p-4 hover:no-underline text-inherit"
+                >
                     <img
                         :src="product.image_url || '/images/placeholder.png'"
                         :alt="product.name"
@@ -22,7 +26,7 @@
                     <h4 class="text-lg font-semibold text-gray-900 mb-1 truncate">{{ product.name }}</h4>
                     <p class="text-sm text-gray-600 mb-3 line-clamp-3">{{ product.description }}</p>
                     <p class="text-blue-600 font-bold text-md">Цена: {{ product.price }} ₽</p>
-                </div>
+                </RouterLink>
             </li>
         </ul>
 
@@ -53,6 +57,7 @@
         </nav>
     </div>
 </template>
+
 
 
 <script>

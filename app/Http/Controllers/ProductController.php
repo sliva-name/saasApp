@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -11,8 +12,11 @@ class ProductController extends Controller
 
     }
 
-    public function show(Product $product)
+    public function show($slug)
     {
-        return view('storefront.product', compact('product'));
+        $product = Product::where('slug', $slug)->firstOrFail();
+
+        return new ProductResource($product);
     }
+
 }

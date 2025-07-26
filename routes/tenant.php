@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchController;
@@ -28,8 +29,17 @@ Route::middleware([
 ])->group(function () {
 
     Route::get('/', [SearchController::class, 'index'])->name('store.index');
-    Route::get('/products/{product}', [ProductController::class, 'show'])->name('store.products.show');
+    Route::get('/api/products/{slug}', [ProductController::class, 'show']);
     Route::get('/search/suggest', [SearchController::class, 'suggest'])->name('store.suggest');
     Route::get('/api/products', [SearchController::class, 'getProducts'])->name('products.get');
+    Route::get('/api/categories/{slug}', [SearchController::class, 'getCategoryProducts']);
+
+
+
+
+
+    Route::get('{any}', function () {
+        return view('layouts.store'); // или как называется твой blade-шаблон
+    })->where('any', '.*');
     require __DIR__.'/auth.php';
 });
