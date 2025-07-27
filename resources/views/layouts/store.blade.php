@@ -8,29 +8,65 @@
 </head>
 <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
 
-<!-- Хедер -->
-<header class="bg-white shadow py-4 mb-6">
-    <div class="container mx-auto flex justify-between items-center px-4">
-        <a href="{{ route('store.index') }}" class="text-2xl font-bold text-blue-600">
-            Мой Магазин
-        </a>
-        <nav class="space-x-4 text-gray-600">
-            <a href="{{ route('store.index') }}" class="hover:underline">Главная</a>
-        </nav>
-    </div>
-</header>
+
+
 
 <!-- Vue App -->
-<main class="container mx-auto px-4 flex-1">
     <div id="tenant-app">
         <!-- Компонент Vue будет смонтирован сюда -->
     </div>
-</main>
 
 <!-- Футер -->
-<footer class="bg-gray-100 py-6 text-center text-sm text-gray-500">
-    &copy; {{ now()->year }} Мой Магазин. Все права защищены.
+<footer class="bg-gray-900 mt-12 flex-0">
+    <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
+        <div class="flex flex-col items-center justify-center text-teal-600">
+            <img width="200" src="{{ asset('logo.png') }}" alt="logo-footer">
+
+            <p class="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-400">
+                Все права защищены. Сайт запрещен для копирования.
+            </p>
+
+            <ul class="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
+                <li>
+                    <a class="text-gray-400 transition hover:text-white" href="/about">
+                        О нас
+                    </a>
+                </li>
+
+                <li>
+                    <a class="text-gray-400 transition hover:text-white" href="/">
+                        Способы оплаты
+                    </a>
+                </li>
+
+                <li>
+                    <a class="text-gray-400 transition hover:text-white" href="/">
+                        Возврат товара
+                    </a>
+                </li>
+
+                <li>
+                    <a class="text-gray-400 transition hover:text-white" href="/">
+                        Возврат денежных средств
+                    </a>
+                </li>
+
+                <li>
+                    <a class="text-gray-400 transition hover:text-white" href="/contacts">
+                        Контакты
+                    </a>
+                </li>
+
+                <li>
+                    <a class="text-gray-400 transition hover:text-white" href="/">
+                        Реквизиты
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </footer>
+
 
 </body>
 </html>

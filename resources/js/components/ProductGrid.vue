@@ -11,7 +11,7 @@
             <li
                 v-for="product in products"
                 :key="product.id"
-                class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition"
+                class="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition"
             >
                 <!-- ССЫЛКА НА ДЕТАЛЬНУЮ СТРАНИЦУ -->
                 <RouterLink
