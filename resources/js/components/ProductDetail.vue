@@ -68,14 +68,14 @@
                         <p class="text-gray-700">{{ product.description }}</p>
                     </div>
 
-                    <!-- Add to bag -->
-                    <form class="space-y-6">
+                    <!-- Add to cart -->
+                    <form class="space-y-6" @submit.prevent="addToCart">
                         <div class="flex space-x-4">
                             <button
                                 type="submit"
                                 class="flex-grow bg-indigo-600 text-white font-semibold py-3 rounded-md hover:bg-indigo-700 transition"
                             >
-                                Add to bag
+                                Add to cart
                             </button>
                             <button type="button" class="flex items-center space-x-2 px-4 rounded-md hover:bg-gray-100 transition">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
@@ -110,9 +110,12 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
+import { useCart } from '@/stores/cart'
 
 const route = useRoute()
 const product = ref(null)
+const { addItem } = useCart()
+const addToCart = () => { if (product.value) addItem(product.value, 1) }
 
 onMounted(async () => {
     const slug = route.params.slug

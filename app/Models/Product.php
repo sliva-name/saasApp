@@ -31,13 +31,17 @@ class Product extends Model implements HasMedia
      */
     public function toSearchableArray(): array
     {
-        return array_merge($this->toArray(),[
+        return [
             'id' => (int) $this->id,
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'description' => $this->description,
             'price' => (float) $this->price,
+            'stock' => (int) $this->stock,
+            'category_id' => (int) $this->category_id,
             'image_url' => $this->getFirstMediaUrl('image'),
-            'category_id' => $this->category_id,
             'created_at' => $this->created_at->timestamp,
-        ]);
+        ];
     }
     protected static function booted()
     {

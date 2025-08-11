@@ -13,6 +13,8 @@ class SearchService
     protected int $page = 1;
     protected int $perPage = 15;
     protected string $modelClass;
+    protected array $sortBy = [];
+    protected array $facets = [];
 
     /**
      * Устанавливает модель для поиска
@@ -46,6 +48,24 @@ class SearchService
     }
 
     /**
+     * Устанавливает сортировку
+     */
+    public function orderBy(string $field, string $direction = 'asc'): self
+    {
+        $this->sortBy[] = "{$field}:{$direction}";
+        return $this;
+    }
+
+    /**
+     * Устанавливает поля для фасеточной выборки (распределения)
+     */
+    public function facets(array $fields): self
+    {
+        $this->facets = $fields;
+        return $this;
+    }
+
+    /**
      * Устанавливает текущую страницу
      */
     public function page(int $page): self
@@ -73,14 +93,25 @@ class SearchService
             $options['limit'] = $this->perPage;
             $options['offset'] = ($this->page - 1) * $this->perPage;
 
+            // Добавляем сортировку
+            if (!empty($this->sortBy)) {
+                $options['sort'] = $this->sortBy;
+            }
+
+            // Запрашиваем фасеточные распределения
+            if (!empty($this->facets)) {
+                $options['facets'] = $this->facets;
+            }
+
             return $engine->search($query, $options);
         });
 
         $result = $builder->raw();
 
         return [
-            'hits' => $result['hits'],
-            'pagination' => $this->buildPagination($result['nbHits']),
+            'hits' => $result['hits'] ?? [],
+            'pagination' => $this->buildPagination($result['nbHits'] ?? 0),
+            'facets' => $result['facetDistribution'] ?? [],
         ];
     }
 

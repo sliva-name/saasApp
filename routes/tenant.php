@@ -7,6 +7,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
@@ -34,12 +38,26 @@ Route::middleware([
     Route::get('/api/products', [SearchController::class, 'getProducts'])->name('products.get');
     Route::get('/api/categories/{slug}', [SearchController::class, 'getCategoryProducts']);
 
+    // Текущий авторизованный пользователь (для SPA-страницы аккаунта)
+    Route::get('/api/me', function (Request $request) {
+        $user = $request->user();
+        if (!$user) {
+            return Response::json(['message' => 'Unauthenticated'], 401);
+        }
+        return Response::json($user);
+    });
+
+    // CSRF-токен для SPA форм
+    Route::get('/api/csrf-token', function () {
+        return Response::json(['token' => Session::token()]);
+    });
+
 
 
 
 
     Route::get('{any}', function () {
-        return view('layouts.store'); // или как называется твой blade-шаблон
+        return View::make('layouts.store'); // или как называется твой blade-шаблон
     })->where('any', '.*');
     require __DIR__.'/auth.php';
 });
