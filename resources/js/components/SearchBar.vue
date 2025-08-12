@@ -15,7 +15,7 @@
                 @keydown.down.prevent="navigateSuggestions(1)"
                 @keydown.up.prevent="navigateSuggestions(-1)"
             />
-            
+
             <!-- Search Icon -->
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <svg class="h-5 w-5 text-secondary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,8 +91,8 @@
                             @click="selectSuggestion(suggestion)"
                             @mouseenter="highlightedIndex = index"
                             class="w-full text-left px-3 py-2 text-sm rounded-lg transition-colors duration-150 flex items-center space-x-2"
-                            :class="index === highlightedIndex 
-                                ? 'bg-primary-50 text-primary-700' 
+                            :class="index === highlightedIndex
+                                ? 'bg-primary-50 text-primary-700'
                                 : 'text-secondary-700 hover:bg-secondary-50'"
                         >
                             <svg class="w-4 h-4 text-secondary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -198,6 +198,7 @@ export default {
                     const { data } = await axios.get('/search/suggest', { params: { q: typed } })
                     const names = Array.isArray(data) ? data.map(item => item?.name).filter(Boolean) : []
                     // Уникальные варианты, максимум 5
+                    showSuggestions.value = suggestions.value.length > 0
                     suggestions.value = Array.from(new Set(names)).slice(0, 5)
                 } catch (error) {
                     console.error('Error fetching suggestions:', error)
@@ -234,6 +235,7 @@ export default {
         const clearSearch = () => {
             query.value = ''
             suggestions.value = []
+            emit('search', '')
             searchInput.value?.focus()
         }
 
@@ -247,7 +249,7 @@ export default {
             if (items.length === 0) return
 
             highlightedIndex.value += direction
-            
+
             if (highlightedIndex.value >= items.length) {
                 highlightedIndex.value = 0
             } else if (highlightedIndex.value < 0) {
@@ -259,7 +261,7 @@ export default {
             const searches = recentSearches.value.filter(s => s !== search)
             searches.unshift(search)
             recentSearches.value = searches.slice(0, 10)
-            
+
             // Сохранение в localStorage
             localStorage.setItem('recentSearches', JSON.stringify(recentSearches.value))
         }
