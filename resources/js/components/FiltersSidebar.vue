@@ -31,17 +31,17 @@
                     class="flex items-center justify-between w-full text-left mb-3"
                 >
                     <h3 class="font-medium text-secondary-900">Категории</h3>
-                    <svg 
-                        class="w-4 h-4 text-secondary-400 transition-transform duration-200" 
+                    <svg
+                        class="w-4 h-4 text-secondary-400 transition-transform duration-200"
                         :class="{ 'rotate-180': openSections.categories }"
-                        fill="none" 
-                        stroke="currentColor" 
+                        fill="none"
+                        stroke="currentColor"
                         viewBox="0 0 24 24"
                     >
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-                
+
                 <transition
                     enter-active-class="transition ease-out duration-200"
                     enter-from-class="opacity-0 max-h-0"
@@ -79,17 +79,17 @@
                     class="flex items-center justify-between w-full text-left mb-3"
                 >
                     <h3 class="font-medium text-secondary-900">Цена</h3>
-                    <svg 
-                        class="w-4 h-4 text-secondary-400 transition-transform duration-200" 
+                    <svg
+                        class="w-4 h-4 text-secondary-400 transition-transform duration-200"
                         :class="{ 'rotate-180': openSections.price }"
-                        fill="none" 
-                        stroke="currentColor" 
+                        fill="none"
+                        stroke="currentColor"
                         viewBox="0 0 24 24"
                     >
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-                
+
                 <transition
                     enter-active-class="transition ease-out duration-200"
                     enter-from-class="opacity-0 max-h-0"
@@ -103,7 +103,7 @@
                             <div>
                                 <label class="block text-xs text-secondary-600 mb-1">От</label>
                                 <input
-                                    v-model.number="priceRange.min"
+                                    v-model.number="localPriceRange.min"
                                     type="number"
                                     placeholder="0"
                                     class="w-full px-3 py-2 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
@@ -113,7 +113,7 @@
                             <div>
                                 <label class="block text-xs text-secondary-600 mb-1">До</label>
                                 <input
-                                    v-model.number="priceRange.max"
+                                    v-model.number="localPriceRange.max"
                                     type="number"
                                     placeholder="100000"
                                     class="w-full px-3 py-2 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
@@ -121,7 +121,7 @@
                                 />
                             </div>
                         </div>
-                        
+
                         <!-- Price Presets -->
                         <div class="space-y-2">
                             <button
@@ -144,17 +144,17 @@
                     class="flex items-center justify-between w-full text-left mb-3"
                 >
                     <h3 class="font-medium text-secondary-900">Наличие</h3>
-                    <svg 
-                        class="w-4 h-4 text-secondary-400 transition-transform duration-200" 
+                    <svg
+                        class="w-4 h-4 text-secondary-400 transition-transform duration-200"
                         :class="{ 'rotate-180': openSections.availability }"
-                        fill="none" 
-                        stroke="currentColor" 
+                        fill="none"
+                        stroke="currentColor"
                         viewBox="0 0 24 24"
                     >
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-                
+
                 <transition
                     enter-active-class="transition ease-out duration-200"
                     enter-from-class="opacity-0 max-h-0"
@@ -220,16 +220,27 @@ export default {
         },
         priceRange: {
             type: Object,
-            default: () => ({ min: 0, max: 100000 })
+            default: () => ({ min: null, max: null })
+        },
+        selectedCategoriesProp: {
+            type: Array,
+            default: () => []
+        },
+        selectedAvailabilityProp: {
+            type: Array,
+            default: () => []
         }
     },
-    emits: ['filter-change'],
+    emits: ['filter-change', 'update:selectedCategoriesProp', 'update:selectedAvailabilityProp', 'update:priceRange'],
     setup(props, { emit }) {
         const searchQuery = ref('')
-        const selectedCategories = ref([])
-        const selectedAvailability = ref([])
-        const priceRange = ref({ min: null, max: null })
-        
+        const selectedCategories = ref([...props.selectedCategoriesProp])
+        const selectedAvailability = ref([...props.selectedAvailabilityProp])
+        const localPriceRange = ref({
+            min: props.priceRange?.min ?? null,
+            max: props.priceRange?.max ?? null
+        })
+
         const openSections = ref({
             categories: true,
             price: true,
@@ -259,14 +270,14 @@ export default {
 
         const hasActiveFilters = computed(() => {
             return selectedCategories.value.length > 0 ||
-                   selectedAvailability.value.length > 0 ||
-                   priceRange.value.min !== null ||
-                   priceRange.value.max !== null
+                selectedAvailability.value.length > 0 ||
+                localPriceRange.value.min !== null ||
+                localPriceRange.value.max !== null
         })
 
         const activeFiltersList = computed(() => {
             const filters = []
-            
+
             if (selectedCategories.value.length > 0) {
                 const categoryNames = props.categories
                     .filter(cat => selectedCategories.value.includes(cat.id))
@@ -276,7 +287,7 @@ export default {
                     label: `Категории: ${categoryNames.join(', ')}`
                 })
             }
-            
+
             if (selectedAvailability.value.length > 0) {
                 const availabilityNames = availabilityOptions
                     .filter(opt => selectedAvailability.value.includes(opt.value))
@@ -286,22 +297,22 @@ export default {
                     label: `Наличие: ${availabilityNames.join(', ')}`
                 })
             }
-            
-            if (priceRange.value.min !== null || priceRange.value.max !== null) {
+
+            if (localPriceRange.value.min !== null || localPriceRange.value.max !== null) {
                 let label = 'Цена: '
-                if (priceRange.value.min !== null && priceRange.value.max !== null) {
-                    label += `${priceRange.value.min} - ${priceRange.value.max} ₽`
-                } else if (priceRange.value.min !== null) {
-                    label += `от ${priceRange.value.min} ₽`
+                if (localPriceRange.value.min !== null && localPriceRange.value.max !== null) {
+                    label += `${localPriceRange.value.min} - ${localPriceRange.value.max} ₽`
+                } else if (localPriceRange.value.min !== null) {
+                    label += `от ${localPriceRange.value.min} ₽`
                 } else {
-                    label += `до ${priceRange.value.max} ₽`
+                    label += `до ${localPriceRange.value.max} ₽`
                 }
                 filters.push({
                     key: 'price',
                     label
                 })
             }
-            
+
             return filters
         })
 
@@ -310,28 +321,32 @@ export default {
         }
 
         const applyFilters = () => {
+            emit('update:selectedCategoriesProp', selectedCategories.value)
+            emit('update:selectedAvailabilityProp', selectedAvailability.value)
+            emit('update:priceRange', localPriceRange.value)
             emit('filter-change', {
                 categories: selectedCategories.value,
                 availability: selectedAvailability.value,
-                priceRange: priceRange.value
+                priceRange: localPriceRange.value
             })
         }
 
+        const priceTimeout = ref(null)
         const applyPriceFilter = () => {
-            // Debounce для цены
             clearTimeout(priceTimeout.value)
-            priceTimeout.value = setTimeout(applyFilters, 500)
+            priceTimeout.value = setTimeout(applyFilters, 500) // debounce
         }
 
         const applyPricePreset = (preset) => {
-            priceRange.value = { min: preset.min, max: preset.max }
+            console.log('fasgas')
+            localPriceRange.value = { min: preset.min, max: preset.max }
             applyFilters()
         }
 
         const clearAllFilters = () => {
             selectedCategories.value = []
             selectedAvailability.value = []
-            priceRange.value = { min: null, max: null }
+            localPriceRange.value = { min: null, max: null }
             applyFilters()
         }
 
@@ -344,19 +359,28 @@ export default {
                     selectedAvailability.value = []
                     break
                 case 'price':
-                    priceRange.value = { min: null, max: null }
+                    localPriceRange.value = { min: null, max: null }
                     break
             }
             applyFilters()
         }
 
-        const priceTimeout = ref(null)
+        // Синхронизация, если родитель меняет props
+        watch(() => props.selectedCategoriesProp, (val) => {
+            selectedCategories.value = [...val]
+        })
+        watch(() => props.selectedAvailabilityProp, (val) => {
+            selectedAvailability.value = [...val]
+        })
+        watch(() => props.priceRange, (val) => {
+            localPriceRange.value = { ...val }
+        })
 
         return {
             searchQuery,
             selectedCategories,
             selectedAvailability,
-            priceRange,
+            localPriceRange,
             openSections,
             pricePresets,
             availabilityOptions,

@@ -9,7 +9,7 @@
             </div>
             <h3 class="text-lg font-semibold text-secondary-900 mb-2">Товары не найдены</h3>
             <p class="text-secondary-600 mb-6">Попробуйте изменить параметры поиска или фильтры</p>
-            <button 
+            <button
                 @click="$emit('reset-filters')"
                 class="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200"
             >
@@ -40,11 +40,11 @@
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                             loading="lazy"
                         />
-                        
+
                         <!-- Quick Actions Overlay -->
                         <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
                             <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex space-x-2">
-                                <button 
+                                <button
                                     @click.prevent="addToWishlist(product)"
                                     class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-medium hover:shadow-large transition-all duration-200 transform hover:scale-110"
                                     :class="{ 'text-accent-500': isInWishlist(product.id) }"
@@ -53,8 +53,8 @@
                                         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                                     </svg>
                                 </button>
-                                
-                                <button 
+
+                                <button
                                     @click.prevent="quickView(product)"
                                     class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-medium hover:shadow-large transition-all duration-200 transform hover:scale-110"
                                 >
@@ -86,7 +86,7 @@
                         <h3 class="font-semibold text-secondary-900 mb-2 line-clamp-2 group-hover:text-primary-600 transition-colors">
                             {{ product.name }}
                         </h3>
-                        
+
                         <p class="text-sm text-secondary-600 mb-3 line-clamp-2 flex-1">
                             {{ product.description }}
                         </p>
@@ -101,16 +101,16 @@
                                     {{ formatPrice(product.price) }}
                                 </span>
                             </div>
-                            
+
                             <!-- Rating -->
                             <div v-if="product.rating" class="flex items-center space-x-1">
                                 <div class="flex items-center">
-                                    <svg 
-                                        v-for="star in 5" 
+                                    <svg
+                                        v-for="star in 5"
                                         :key="star"
                                         class="w-4 h-4"
                                         :class="star <= product.rating ? 'text-yellow-400' : 'text-secondary-300'"
-                                        fill="currentColor" 
+                                        fill="currentColor"
                                         viewBox="0 0 20 20"
                                     >
                                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
@@ -124,7 +124,7 @@
 
                 <!-- Add to Cart Button -->
                 <div class="p-4 pt-0">
-                    <button 
+                    <button
                         @click="addToCart(product)"
                         class="w-full bg-primary-600 text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition-colors duration-200 flex items-center justify-center space-x-2 group-hover:shadow-medium"
                     >
@@ -138,47 +138,14 @@
         </div>
 
         <!-- Pagination -->
-        <nav
-            v-if="pagination.last_page > 1"
-            class="flex flex-wrap justify-center items-center mt-12 gap-2"
-            aria-label="Pagination"
-        >
+        <div v-if="pagination.current_page < pagination.last_page" class="flex justify-center mt-8">
             <button
-                :disabled="pagination.current_page === 1"
-                @click="$emit('page-change', pagination.current_page - 1)"
-                class="px-4 py-2 bg-white border border-secondary-300 text-secondary-700 rounded-lg hover:bg-secondary-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center space-x-2"
+                @click="$emit('load-more')"
+                class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50"
             >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-                <span>Назад</span>
+                Показать ещё
             </button>
-
-            <div class="flex items-center space-x-1">
-                <button
-                    v-for="page in visiblePages"
-                    :key="page"
-                    @click="$emit('page-change', page)"
-                    class="px-3 py-2 rounded-lg transition-colors duration-200"
-                    :class="page === pagination.current_page 
-                        ? 'bg-primary-600 text-white' 
-                        : 'bg-white border border-secondary-300 text-secondary-700 hover:bg-secondary-50'"
-                >
-                    {{ page }}
-                </button>
-            </div>
-
-            <button
-                :disabled="pagination.current_page === pagination.last_page"
-                @click="$emit('page-change', pagination.current_page + 1)"
-                class="px-4 py-2 bg-white border border-secondary-300 text-secondary-700 rounded-lg hover:bg-secondary-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center space-x-2"
-            >
-                <span>Вперёд</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </button>
-        </nav>
+        </div>
     </div>
 </template>
 
@@ -207,10 +174,10 @@ export default {
             const current = props.pagination.current_page
             const last = props.pagination.last_page
             const delta = 2
-            
+
             let start = Math.max(1, current - delta)
             let end = Math.min(last, current + delta)
-            
+
             if (end - start < 4) {
                 if (start === 1) {
                     end = Math.min(last, start + 4)
@@ -218,12 +185,12 @@ export default {
                     start = Math.max(1, end - 4)
                 }
             }
-            
+
             const pages = []
             for (let i = start; i <= end; i++) {
                 pages.push(i)
             }
-            
+
             return pages
         })
 

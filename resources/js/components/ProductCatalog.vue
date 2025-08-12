@@ -6,8 +6,8 @@
                 <h1 class="text-4xl font-bold mb-4">Найдите то, что ищете</h1>
                 <p class="text-xl opacity-90 mb-8">Широкий ассортимент товаров для ваших потребностей</p>
                 <div class="max-w-2xl mx-auto">
-                    <SearchBar 
-                        @search="onSearch" 
+                    <SearchBar
+                        :initial-query="query" @search="onSearch"
                         placeholder="Поиск товаров..."
                         class="w-full"
                     />
@@ -29,7 +29,7 @@
             </div>
             <h3 class="text-lg font-semibold text-secondary-900 mb-2">Ошибка загрузки</h3>
             <p class="text-secondary-600 mb-6">{{ error }}</p>
-            <button 
+            <button
                 @click="fetchProducts"
                 class="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
             >
@@ -44,8 +44,11 @@
         <div v-else class="flex flex-col lg:flex-row gap-8">
             <!-- Filters Sidebar -->
             <aside class="lg:w-1/4">
-                <FiltersSidebar 
+                <FiltersSidebar
                     :categories="categories"
+                    v-model:selectedCategoriesProp="selectedCategories"
+                    v-model:selectedAvailabilityProp="selectedAvailability"
+                    v-model:priceRange="priceRange"
                     @filter-change="handleFilterChange"
                 />
             </aside>
@@ -62,11 +65,11 @@
                             Найдено {{ pagination.total || 0 }} товаров
                         </p>
                     </div>
-                    
+
                     <!-- Sort Options -->
                     <div class="flex items-center space-x-4">
                         <label class="text-sm font-medium text-secondary-700">Сортировка:</label>
-                        <select 
+                        <select
                             v-model="sortBy"
                             @change="onSortChange"
                             class="px-3 py-2 border border-secondary-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm"
@@ -83,18 +86,20 @@
 
                 <!-- Products Grid -->
                 <ProductGrid
+                    v-if="!loading"
                     :products="products"
                     :pagination="pagination"
-                    @page-change="onPageChange"
+                    @load-more="loadMore"
                     @reset-filters="resetFilters"
                 />
+                <div v-else>Загрузка...</div>
             </main>
         </div>
     </div>
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import axios from 'axios'
 import SearchBar from './SearchBar.vue'
 import FiltersSidebar from './FiltersSidebar.vue'
@@ -104,73 +109,101 @@ export default {
     components: { SearchBar, FiltersSidebar, ProductGrid },
 
     setup() {
-        const query = ref('')
-        const filters = ref({})
-        const page = ref(1)
+        const query = ref(localStorage.getItem('query') || '')
+        const filters = ref(JSON.parse(localStorage.getItem('filters') || '{}'))
+        const sortBy = ref(localStorage.getItem('sortBy') || 'relevance')
+        const page = ref(parseInt(localStorage.getItem('currentPage')) || 1)
+        const priceRange = ref({min: null, max: null})
         const products = ref([])
+        const selectedCategories = ref([])
+        const selectedAvailability = ref([])
         const pagination = ref({})
         const categories = ref([])
         const brands = ref([])
         const loading = ref(false)
         const error = ref(null)
-        const sortBy = ref('relevance')
 
         const resultsTitle = computed(() => {
-            if (query.value) {
-                return `Результаты поиска: "${query.value}"`
-            }
-            return 'Все товары'
+            return query.value ? `Результаты поиска: "${query.value}"` : 'Все товары'
         })
 
-        const fetchProducts = async () => {
+        // Автосохранение состояния
+        watch([query, filters, sortBy, page], () => {
+            localStorage.setItem('query', query.value)
+            localStorage.setItem('filters', JSON.stringify(filters.value))
+            localStorage.setItem('sortBy', sortBy.value)
+            localStorage.setItem('currentPage', page.value)
+        }, { deep: true })
+
+        const fetchProducts = async (append = false) => {
             loading.value = true
             error.value = null
-            
+
             try {
-                const params = { 
-                    query: query.value, 
-                    page: page.value, 
+                const params = {
+                    query: query.value,
+                    page: page.value,
                     sort: sortBy.value,
-                    ...filters.value 
+                    ...filters.value
                 }
-                
+
                 const { data } = await axios.get('/api/products', { params })
-                
-                products.value = data.products || []
+
+                if (append) {
+                    products.value = [...products.value, ...(data.products || [])]
+                } else {
+                    products.value = data.products || []
+                }
+
                 pagination.value = data.pagination || {}
                 categories.value = data.categories || []
                 brands.value = data.brands || []
-                
+
             } catch (err) {
                 console.error('Error fetching products:', err)
                 error.value = 'Не удалось загрузить товары. Попробуйте позже.'
-                products.value = []
-                pagination.value = {}
+                if (!append) {
+                    products.value = []
+                    pagination.value = {}
+                }
             } finally {
                 loading.value = false
+            }
+        }
+
+        const initialLoad = async () => {
+            // Загружаем первую страницу
+            await fetchProducts(false)
+
+            // Если есть вторая страница — догружаем
+            if (pagination.value.current_page < pagination.value.last_page) {
+                page.value++
+                await fetchProducts(true)
             }
         }
 
         const onSearch = (searchQuery) => {
             query.value = searchQuery
             page.value = 1
-            fetchProducts()
+            fetchProducts(false)
         }
 
         const handleFilterChange = (newFilters) => {
             filters.value = newFilters
             page.value = 1
-            fetchProducts()
+            fetchProducts(false)
         }
 
-        const onPageChange = (newPage) => {
-            page.value = newPage
-            fetchProducts()
+        const loadMore = () => {
+            if (page.value < pagination.value.last_page) {
+                page.value++
+                fetchProducts(true)
+            }
         }
 
         const onSortChange = () => {
             page.value = 1
-            fetchProducts()
+            fetchProducts(false)
         }
 
         const resetFilters = () => {
@@ -178,10 +211,10 @@ export default {
             query.value = ''
             page.value = 1
             sortBy.value = 'relevance'
-            fetchProducts()
+            fetchProducts(false)
         }
 
-        onMounted(fetchProducts)
+        onMounted(initialLoad)
 
         return {
             query,
@@ -195,13 +228,17 @@ export default {
             error,
             sortBy,
             resultsTitle,
+            selectedCategories,
+            selectedAvailability,
+            priceRange,
             fetchProducts,
             onSearch,
             handleFilterChange,
-            onPageChange,
+            loadMore,
             onSortChange,
             resetFilters
         }
     }
 }
+
 </script>
