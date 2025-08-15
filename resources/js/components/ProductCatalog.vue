@@ -207,10 +207,17 @@ export default {
         }
 
         const resetFilters = () => {
+            // Сбрасываем состояние фильтров
             filters.value = {}
             query.value = ''
             page.value = 1
             sortBy.value = 'relevance'
+
+            // Сбрасываем значения, которые связаны с FiltersSidebar через v-model
+            selectedCategories.value = []
+            selectedAvailability.value = []
+            priceRange.value = { min: null, max: null }
+
             fetchProducts(false)
         }
 

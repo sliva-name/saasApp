@@ -146,11 +146,11 @@
         <transition name="slide">
             <div
                 v-if="isMobileMenuOpen"
-                class="fixed inset-0 z-50 bg-black bg-opacity-25 lg:hidden"
+                class="fixed inset-0 z-50 bg-black bg-opacity-25 lg:hidden min-h-screen h-screen"
                 @click="isMobileMenuOpen = false"
             >
                 <div 
-                    class="fixed inset-y-0 right-0 max-w-xs w-full bg-white shadow-large"
+                    class="fixed inset-y-0 right-0 w-full bg-white shadow-large"
                     @click.stop
                 >
                     <div class="flex items-center justify-between p-4 border-b border-secondary-200">
@@ -165,7 +165,7 @@
                         </button>
                     </div>
                     
-                    <div class="px-4 py-6 space-y-4">
+                    <div class="px-4 py-6 space-y-4 bg-white">
                         <RouterLink 
                             to="/" 
                             class="block text-secondary-700 hover:text-primary-600 font-medium transition-colors"

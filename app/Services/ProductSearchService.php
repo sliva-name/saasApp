@@ -16,8 +16,10 @@ class ProductSearchService
     {
         $query = $request->input('query', '');
 
-        $filters = [];
-
+        $filters = [
+            'tenant_id' => tenant()->id,
+        ];
+        
         // Обработка фильтров по цене из priceRange
         if ($request->has('priceRange')) {
             $priceRange = $request->input('priceRange');

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
             $table->string('slug')->unique();
             $table->json('attributes')->nullable(); // для гибких характеристик (цвет, размер и т.п.)
+            $table->uuid('tenant_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

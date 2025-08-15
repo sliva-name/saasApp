@@ -22,6 +22,7 @@ class Product extends Model implements HasMedia
         'price',
         'stock',
         'category_id',
+        'tenant_id',
     ];
     protected $casts = [
         'attributes' => 'array',
@@ -34,6 +35,7 @@ class Product extends Model implements HasMedia
         return [
             'id' => (int) $this->id,
             'name' => $this->name,
+            'tenant_id' => $this->tenant_id,
             'slug' => $this->slug,
             'description' => $this->description,
             'price' => (float) $this->price,
@@ -43,12 +45,18 @@ class Product extends Model implements HasMedia
             'created_at' => $this->created_at->timestamp,
         ];
     }
+
     protected static function booted()
-    {
-        static::creating(function ($product) {
-            $product->slug = Str::slug($product->name);
-        });
-    }
+{
+    static::creating(function ($product) {
+        $product->slug = Str::slug($product->name);
+        $product->tenant_id ??= tenant('id'); 
+    });
+    
+    static::addGlobalScope('tenant', function ($builder) {
+        $builder->where('tenant_id', tenant()->id);
+    });
+}
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('image')

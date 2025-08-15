@@ -13,10 +13,10 @@ class ProductSeeder extends Seeder
 {
     public function run(): void
     {
-
+        Product::removeAllFromSearch(); // Удаляем все индексы
+        
         TenantContext::forEachTenant(function ($tenant) {
             Product::query()->delete(); // удаляем все продукты
-            Product::removeAllFromSearch(); // Удаляем все индексы
             $this->command?->warn("Удалены все записи");
             $categories = Category::all();
 
