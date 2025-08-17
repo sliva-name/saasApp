@@ -11,10 +11,10 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         $name = $this->faker->unique()->words(2, true);
-
+        $slug = Str::slug($name) . '-' . uniqid();
         return [
             'name' => ucfirst($name),
-            'slug' => Str::slug($name),
+            'slug' => $slug,
             'parent_id' => null, // основная категория
         ];
     }
