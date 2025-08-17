@@ -6,7 +6,6 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
-
 document.addEventListener('alpine:init', () => {
     Alpine.data('notification', () => ({
         init() {
@@ -16,12 +15,11 @@ document.addEventListener('alpine:init', () => {
         }
     }));
 });
-
 // Toggle sidebar on mobile
 document.addEventListener('DOMContentLoaded', function() {
     const sidebarToggle = document.getElementById('sidebarToggle');
     const sidebar = document.getElementById('sidebar');
-    
+
     if (sidebarToggle && sidebar) {
         sidebarToggle.addEventListener('click', function() {
             sidebar.classList.toggle('-translate-x-full');

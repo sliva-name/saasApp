@@ -26,14 +26,14 @@
                 <x-nav-item href="{{ route('dashboard') }}" icon="fas fa-home" active="{{ request()->routeIs('dashboard') }}">
                     Главная
                 </x-nav-item>
-                
+
                 <x-nav-item href="{{ route('stores.index') }}" icon="fas fa-store" active="{{ request()->routeIs('stores.*') }}">
                     Мои магазины
                     <span class="ml-auto bg-indigo-100 dark:bg-indigo-900/30 text-indigo-800 dark:text-indigo-200 text-xs px-2 py-0.5 rounded-full">
                         {{ auth()->user()->stores->count() }}
                     </span>
                 </x-nav-item>
-                
+
                 <x-nav-item href="{{ route('settings.index') }}" icon="fas fa-cog" active="{{ request()->routeIs('settings') }}">
                     Настройки
                 </x-nav-item>
@@ -44,7 +44,7 @@
                 <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3 px-3">
                     <i class="fas fa-store mr-1"></i> Ваши магазины
                 </h3>
-                
+
                 <div class="space-y-1.5">
                     @forelse(auth()->user()->stores as $store)
                         <x-store-item :store="$store" />

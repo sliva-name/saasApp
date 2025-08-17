@@ -25,14 +25,13 @@
                     </div>
                     <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-indigo-500">ShopCraft</span>
                 </div>
-                
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#features" class="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Возможности</a>
                     <a href="#templates" class="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Шаблоны</a>
                     <a href="#pricing" class="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Цены</a>
                     <a href="#testimonials" class="text-sm font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Отзывы</a>
                 </div>
-                
+
                 <div class="flex items-center space-x-4">
                     <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-neutral-800 transition-colors">
                         <i class="fas fa-moon dark:hidden"></i>
@@ -78,7 +77,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="relative">
                 <div class="absolute -top-10 -left-10 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl"></div>
                 <div class="relative glass p-1 rounded-2xl shadow-2xl">
@@ -123,7 +122,7 @@
                 ShopCraft предоставляет полный набор инструментов для запуска, управления и масштабирования вашего интернет-магазина.
             </p>
         </div>
-        
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="glass p-8 rounded-2xl hover:shadow-xl transition-all">
                 <div class="w-12 h-12 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-6">
@@ -134,7 +133,7 @@
                     Наш ИИ создаст профессиональные описания товаров и SEO-метаданные за секунды, экономя ваше время.
                 </p>
             </div>
-            
+
             <div class="glass p-8 rounded-2xl hover:shadow-xl transition-all">
                 <div class="w-12 h-12 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-6">
                     <i class="fas fa-paint-brush text-xl"></i>
@@ -144,7 +143,7 @@
                     Создавайте уникальные дизайны с помощью нашего интуитивного редактора. Никакого кода - только креатив.
                 </p>
             </div>
-            
+
             <div class="glass p-8 rounded-2xl hover:shadow-xl transition-all">
                 <div class="w-12 h-12 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-6">
                     <i class="fas fa-globe text-xl"></i>
@@ -154,7 +153,7 @@
                     Продавайте по всему миру с автоматическим переводом и локальными платежными системами.
                 </p>
             </div>
-            
+
             <div class="glass p-8 rounded-2xl hover:shadow-xl transition-all">
                 <div class="w-12 h-12 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-6">
                     <i class="fas fa-chart-pie text-xl"></i>
@@ -164,7 +163,7 @@
                     Получайте детальные отчеты о поведении покупателей и эффективности маркетинга.
                 </p>
             </div>
-            
+
             <div class="glass p-8 rounded-2xl hover:shadow-xl transition-all">
                 <div class="w-12 h-12 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-6">
                     <i class="fas fa-robot text-xl"></i>
@@ -174,7 +173,7 @@
                     Персональный помощник подскажет как увеличить продажи и оптимизировать магазин.
                 </p>
             </div>
-            
+
             <div class="glass p-8 rounded-2xl hover:shadow-xl transition-all">
                 <div class="w-12 h-12 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-6">
                     <i class="fas fa-mobile-alt text-xl"></i>
@@ -216,7 +215,7 @@
                 Выберите из 50+ профессиональных шаблонов, которые можно полностью настроить под ваш бренд.
             </p>
         </div>
-        
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all">
                 <div class="aspect-[4/3] bg-gray-100 overflow-hidden">
@@ -232,7 +231,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all">
                 <div class="aspect-[4/3] bg-gray-100 overflow-hidden">
                     <img src="https://cdn.dribbble.com/users/15687/screenshots/18131040/media/4a4a1f8e8a8e0e0e0e0e0e0e0e0e0e0.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Template 2">
@@ -247,7 +246,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all">
                 <div class="aspect-[4/3] bg-gray-100 overflow-hidden">
                     <img src="https://cdn.dribbble.com/users/15687/screenshots/18131040/media/4a4a1f8e8a8e0e0e0e0e0e0e0e0e0e0.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Template 3">
@@ -263,7 +262,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="text-center mt-12">
             <a href="#" class="inline-flex items-center px-6 py-3 border border-gray-300 dark:border-gray-700 rounded-xl font-medium hover:bg-gray-100 dark:hover:bg-neutral-800 transition-colors">
                 <span>Посмотреть все шаблоны</span>
@@ -279,7 +278,7 @@
                 <span class="inline-block px-3 py-1 text-xs font-medium rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400">ОТЗЫВЫ</span>
                 <h2 class="mt-4 text-3xl font-bold text-gray-900 dark:text-white">Что говорят наши клиенты</h2>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="glass p-8 rounded-2xl">
                     <div class="flex items-center mb-4">
@@ -302,7 +301,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="glass p-8 rounded-2xl">
                     <div class="flex items-center mb-4">
                         <div class="flex items-center space-x-1 text-yellow-400">
@@ -324,7 +323,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="glass p-8 rounded-2xl">
                     <div class="flex items-center mb-4">
                         <div class="flex items-center space-x-1 text-yellow-400">
@@ -359,7 +358,7 @@
                 Начните бесплатно и обновляйтесь по мере роста вашего магазина.
             </p>
         </div>
-        
+
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div class="glass p-8 rounded-2xl hover:shadow-xl transition-all">
                 <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">Старт</h3>
@@ -390,7 +389,7 @@
                     Начать бесплатно
                 </a>
             </div>
-            
+
             <div class="glass p-8 rounded-2xl border-2 border-indigo-500 relative hover:shadow-xl transition-all">
                 <div class="absolute top-0 right-0 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">ПОПУЛЯРНЫЙ</div>
                 <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">Профи</h3>
@@ -421,7 +420,7 @@
                     Попробовать 14 дней
                 </a>
             </div>
-            
+
             <div class="glass p-8 rounded-2xl hover:shadow-xl transition-all">
                 <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">Премиум</h3>
                 <p class="text-gray-600 dark:text-gray-400 mb-6">Для масштабирования</p>
@@ -489,7 +488,7 @@
                         <a href="#" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                
+
                 <div>
                     <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Продукт</h3>
                     <ul class="mt-4 space-y-3">
@@ -499,7 +498,7 @@
                         <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400">Интеграции</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Ресурсы</h3>
                     <ul class="mt-4 space-y-3">
@@ -509,7 +508,7 @@
                         <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400">Поддержка</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Компания</h3>
                     <ul class="mt-4 space-y-3">
@@ -520,7 +519,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800 flex flex-col md:flex-row justify-between items-center">
                 <p class="text-gray-500 text-sm">
                     © 2023 ShopCraft. Все права защищены.
@@ -537,17 +536,17 @@
         // Тема
         const themeToggle = document.getElementById('theme-toggle');
         const html = document.documentElement;
-        
+
         themeToggle.addEventListener('click', () => {
             html.classList.toggle('dark');
             localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
         });
-        
+
         // Проверяем сохраненную тему
         if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             html.classList.add('dark');
         }
-        
+
         // Курсор эффект
         document.addEventListener('mousemove', (e) => {
             const cursorEffect = document.getElementById('cursor-effect');
@@ -555,7 +554,7 @@
             cursorEffect.style.top = `${e.clientY - 128}px`;
             cursorEffect.style.opacity = '1';
         });
-        
+
         // Плавная прокрутка
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -565,7 +564,7 @@
                 });
             });
         });
-        
+
         // Анимация при скролле
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -574,7 +573,7 @@
                 }
             });
         }, { threshold: 0.1 });
-        
+
         document.querySelectorAll('section').forEach(section => {
             observer.observe(section);
         });
