@@ -1,9 +1,21 @@
 import './bootstrap';
 import Alpine from 'alpinejs';
+import '@fortawesome/fontawesome-free/js/all.js';
 
 window.Alpine = Alpine;
 
 Alpine.start();
+
+
+document.addEventListener('alpine:init', () => {
+    Alpine.data('notification', () => ({
+        init() {
+            setTimeout(() => {
+                this.show = false;
+            }, 5000);
+        }
+    }));
+});
 
 // Toggle sidebar on mobile
 document.addEventListener('DOMContentLoaded', function() {

@@ -30,11 +30,12 @@ class StoreController extends Controller
 
         return redirect()->route('stores.show', $store->id)->with('success', 'Магазин создан!');
     }
-    public function show(Store $store)
+    public function index()
     {
         $stores = Store::with(['owner', 'theme', 'domains'])
             ->orderByDesc('created_at')
             ->paginate(10);
-        return view('stores.show', compact('stores'));
+            
+        return view('stores.index', compact('stores'));
     }
 }

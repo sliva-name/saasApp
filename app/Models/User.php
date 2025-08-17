@@ -48,6 +48,11 @@ class User extends Authenticatable
         return $this->hasRole('super-admin');
     }
 
+    public function stores(): User|\Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Store::class);
+    }
+
     public function registerMediaConversions(Media|\Spatie\MediaLibrary\MediaCollections\Models\Media $media = null): void
     {
         $this->addMediaConversion('avatar_thumb')

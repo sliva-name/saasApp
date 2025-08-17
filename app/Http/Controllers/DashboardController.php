@@ -11,6 +11,6 @@ class DashboardController extends Controller
         $stores = Store::with(['owner', 'theme', 'domains'])
             ->orderByDesc('created_at')
             ->paginate(10);
-        return view('stores.show', compact('stores'));
+        return view('dashboard', compact('stores'));
     }
 }

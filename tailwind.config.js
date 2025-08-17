@@ -5,6 +5,7 @@ import aspectRatio from '@tailwindcss/aspect-ratio';
 
 /** @type {import('tailwindcss').Config} */
 export default {
+    darkMode: 'class',
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         "./resources/**/*.vue",
@@ -19,6 +20,9 @@ export default {
             },
             colors: {
                 primary: {
+                    light: '#6366f1',
+                    DEFAULT: '#4f46e5',
+                    dark: '#4338ca',
                     50: '#eff6ff',
                     100: '#dbeafe',
                     200: '#bfdbfe',
@@ -59,6 +63,7 @@ export default {
                 }
             },
             animation: {
+                'float': 'float 6s ease-in-out infinite',
                 'fade-in': 'fadeIn 0.5s ease-in-out',
                 'slide-up': 'slideUp 0.3s ease-out',
                 'slide-down': 'slideDown 0.3s ease-out',
@@ -66,6 +71,10 @@ export default {
                 'bounce-gentle': 'bounceGentle 2s infinite',
             },
             keyframes: {
+                float: {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-20px)' },
+                },
                 fadeIn: {
                     '0%': { opacity: '0' },
                     '100%': { opacity: '1' },
