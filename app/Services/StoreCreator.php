@@ -33,7 +33,7 @@ class StoreCreator
         return Str::slug($user->name) . '-' . Str::random(6);
     }
 
-    protected function generateUniqueSubdomain(User $user, string $slug = null): string
+    protected function generateUniqueSubdomain(User $user, ?string $slug = null): string
     {
         $slug ??= $this->generateSlug($user);
 

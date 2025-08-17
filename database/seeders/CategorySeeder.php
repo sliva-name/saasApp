@@ -11,6 +11,7 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         TenantContext::forEachTenant(function () {
+            Category::query()->delete();
             Category::factory()
                 ->count(5)
                 ->create()

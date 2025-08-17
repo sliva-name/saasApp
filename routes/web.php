@@ -5,7 +5,7 @@ use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 
 
-//Route::get('/', fn() => view('welcome'))->middleware('web');
+Route::get('/', fn() => view('welcome'))->middleware('web');
 Route::middleware(['auth', 'auth:web'])->group(function () {
     Route::get('/stores/create', [StoreController::class, 'create'])->name('stores.create');
     Route::post('/stores', [StoreController::class, 'store'])->name('stores.store');

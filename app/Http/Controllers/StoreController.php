@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Plan;
 use App\Models\Store;
 use App\Services\StoreCreator;
 use Illuminate\Http\Request;
@@ -10,14 +11,16 @@ class StoreController extends Controller
 {
     public function create()
     {
-        return view('stores.create');
+        $plans = Plan::all();
+
+        return view('stores.create', compact('plans'));
     }
 
     public function store(Request $request, StoreCreator $creator)
     {
         $request->validate([
-            'plan' => 'required|in:free,basic,pro',
-            'custom_domain' => 'nullable|string|regex:/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/|unique:domains,domain|max:50',
+            'plan' => 'required|in:Free,Basic,Pro',
+            'custom_domain' => 'nullable|string|regex:/^[a-z0-9]+([\-]?[a-z0-9]+)*(\.[a-z]{2,})+$/i|unique:domains,domain|max:50',
             'theme_id' => ['nullable', 'integer', 'exists:themes,id'],
         ]);
 
