@@ -4,13 +4,13 @@ import TenantApp from './components/TenantApp.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import ProductCatalog from './components/ProductCatalog.vue'
 import ProductDetail from './components/ProductDetail.vue'
-import CategoryPage from "./components/CategoryPage.vue";
-import AccountPage from './components/AccountPage.vue'
-import RegisterPage from './components/RegisterPage.vue'
-import LoginPage from './components/LoginPage.vue'
-import ForgotPasswordPage from './components/ForgotPasswordPage.vue'
-import ResetPasswordPage from './components/ResetPasswordPage.vue'
-import CartPage from './components/CartPage.vue'
+import CategoryPage from "./pages/CategoryPage.vue";
+import AccountPage from './pages/AccountPage.vue'
+import RegisterPage from './pages/RegisterPage.vue'
+import LoginPage from './pages/LoginPage.vue'
+import ForgotPasswordPage from './pages/ForgotPasswordPage.vue'
+import ResetPasswordPage from './pages/ResetPasswordPage.vue'
+import CartPage from './pages/CartPage.vue'
 
 // Определяем маршруты
 const routes = [

@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function stores(): User|\Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Store::class);
+        return $this->hasMany(Store::class, 'user_id');
     }
 
     public function registerMediaConversions(Media|\Spatie\MediaLibrary\MediaCollections\Models\Media $media = null): void

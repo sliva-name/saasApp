@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Store\StoreStoreRequest;
 use App\Models\Plan;
 use App\Models\Store;
 use App\Services\StoreCreator;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class StoreController extends Controller
 {
@@ -16,15 +16,12 @@ class StoreController extends Controller
         return view('stores.create', compact('plans'));
     }
 
-    public function store(Request $request, StoreCreator $creator)
+    public function store(StoreStoreRequest $request, StoreCreator $creator)
     {
-        $request->validate([
-            'plan' => 'required|in:Free,Basic,Pro',
-            'custom_domain' => 'nullable|string|regex:/^[a-z0-9]+([\-]?[a-z0-9]+)*(\.[a-z]{2,})+$/i|unique:domains,domain|max:50',
-            'theme_id' => ['nullable', 'integer', 'exists:themes,id'],
-        ]);
-
         $user = Auth::user();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Необходимо войти в систему для создания магазина.');
+        }
 
         $store = $creator->create($user, $request->plan, $request->custom_domain, $request->theme_id);
 
@@ -37,5 +34,28 @@ class StoreController extends Controller
             ->paginate(10);
             
         return view('stores.index', compact('stores'));
+    }
+
+    public function show(Store $store)
+    {
+        // Проверяем, что пользователь является владельцем магазина
+        $user = Auth::user();
+        if (!$user || $store->user_id !== $user->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        return view('stores.show', compact('store'));
+    }
+
+    public function settings()
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Необходимо войти в систему для доступа к настройкам.');
+        }
+
+        $stores = $user->stores()->with(['theme', 'domains'])->get();
+        
+        return view('stores.settings', compact('stores'));
     }
 }
