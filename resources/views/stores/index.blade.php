@@ -36,7 +36,7 @@
                 <i class="fas fa-arrow-up mr-1"></i><span>12% за месяц</span>
             </p>
         </div>
-        
+
         <div class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-gray-200 dark:border-gray-700">
             <div class="flex justify-between items-start">
                 <div>
@@ -51,7 +51,7 @@
                 <i class="fas fa-arrow-up mr-1"></i><span>5% за месяц</span>
             </p>
         </div>
-        
+
         <div class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-gray-200 dark:border-gray-700">
             <div class="flex justify-between items-start">
                 <div>
@@ -66,7 +66,7 @@
                 <i class="fas fa-arrow-down mr-1"></i><span>3% за месяц</span>
             </p>
         </div>
-        
+
         <div class="bg-white dark:bg-neutral-800 rounded-xl p-5 shadow-sm border border-gray-200 dark:border-gray-700">
             <div class="flex justify-between items-start">
                 <div>
@@ -129,7 +129,7 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <div class="flex justify-end space-x-2">
-                                <a href="#" class="text-indigo-600 hover:text-indigo-900 dark:hover:text-indigo-400 p-2 rounded hover:bg-indigo-50/50 dark:hover:bg-indigo-900/20 transition-colors" title="Просмотр">
+                                <a href="{{ route('stores.show', $store->id) }}" class="text-indigo-600 hover:text-indigo-900 dark:hover:text-indigo-400 p-2 rounded hover:bg-indigo-50/50 dark:hover:bg-indigo-900/20 transition-colors" title="Просмотр">
                                     <i class="fas fa-eye"></i>
                                 </a>
                                 <a href="#" class="text-gray-600 hover:text-gray-900 dark:hover:text-gray-300 p-2 rounded hover:bg-gray-100 dark:hover:bg-neutral-700 transition-colors" title="Редактировать">
