@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tenants', function (Blueprint $table) {
+            $table->string('name'); // Добавляем поле name для магазина
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('plan')->nullable();
             $table->string('slug')->unique();
@@ -25,7 +26,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('tenants', function (Blueprint $table) {
-            $table->dropColumn(['user_id', 'plan', 'slug', 'theme_id']);
+            $table->dropColumn(['name', 'user_id', 'plan', 'slug', 'theme_id']);
         });
     }
 };

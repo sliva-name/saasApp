@@ -155,6 +155,11 @@ scout-import: ## Импортировать данные в Scout
 	docker-compose -f $(COMPOSE_FILE) exec app php artisan scout:import
 	@echo "$(GREEN)✅ Данные импортированы в Scout!$(NC)"
 
+scout-sync: ## Синхронизировать индекс Scout
+	@echo "$(YELLOW)📥 Синхронизация индекса Scout...$(NC)"
+	docker-compose -f $(COMPOSE_FILE) exec app php artisan scout:sync-index-settings
+	@echo "$(GREEN)✅ Индекс Scout синхронизирован!$(NC)"
+
 # Команды для работы с очередями
 queue-work: ## Запустить обработку очередей
 	@echo "$(YELLOW)🔄 Запуск обработки очередей...$(NC)"

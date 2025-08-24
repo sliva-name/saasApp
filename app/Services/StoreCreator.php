@@ -8,11 +8,12 @@ use Illuminate\Support\Str;
 
 class StoreCreator
 {
-    public function create(User $user, string $plan, ?string $customDomain = null, ?int $themeId = null): Store
+    public function create(User $user, string $shopName, string $plan, ?string $customDomain = null, ?int $themeId = null): Store
     {
         $slug = $this->generateSlug($user);
 
         $store = Store::create([
+            'name' => $shopName,
             'user_id' => $user->id,
             'plan' => $plan,
             'slug' => $slug,

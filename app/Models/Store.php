@@ -15,12 +15,14 @@ class Store extends BaseTenant implements TenantWithDatabase
     public static function getCustomColumns(): array
     {
         return array_merge(parent::getCustomColumns(), [
+            'name',
             'user_id',
             'plan',
             'slug',
             'theme_id',
         ]);
     }
+    protected $guarded = [];
 
     public function owner(): BelongsTo
     {

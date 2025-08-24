@@ -23,7 +23,13 @@ class StoreController extends Controller
             return redirect()->route('login')->with('error', 'Необходимо войти в систему для создания магазина.');
         }
 
-        $store = $creator->create($user, $request->plan, $request->custom_domain, $request->theme_id);
+        $store = $creator->create(
+            user: $user,
+            shopName: $request->shop_name,
+            plan:  $request->plan,
+            customDomain: $request->custom_domain,
+            themeId: $request->theme_id
+        );
 
         return redirect()->route('stores.show', $store->id)->with('success', 'Магазин создан!');
     }
@@ -32,7 +38,7 @@ class StoreController extends Controller
         $stores = Store::with(['owner', 'theme', 'domains'])
             ->orderByDesc('created_at')
             ->paginate(10);
-            
+
         return view('stores.index', compact('stores'));
     }
 
@@ -55,7 +61,7 @@ class StoreController extends Controller
         }
 
         $stores = $user->stores()->with(['theme', 'domains'])->get();
-        
+
         return view('stores.settings', compact('stores'));
     }
 }

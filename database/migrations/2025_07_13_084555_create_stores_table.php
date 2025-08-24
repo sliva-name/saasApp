@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('name');
             $table->string('slug')->unique();
             $table->string('domain')->nullable();
             $table->boolean('is_active')->default(true);
