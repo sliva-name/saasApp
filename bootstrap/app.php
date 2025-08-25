@@ -8,6 +8,9 @@ use Stancl\Tenancy\Exceptions\TenantCouldNotBeIdentifiedOnDomainException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
+    ->withProviders([
+        App\Providers\ThemeServiceProvider::class,
+    ])
     ->withRouting(
         using: function () {
             $centralDomains = config('tenancy.central_domains');
@@ -24,7 +27,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up'
     )
     ->withMiddleware(function (Middleware $middleware): void {
-
+        // Регистрируем middleware для обслуживания ассетов тем
+        $middleware->web(append: [
+            \App\Http\Middleware\ThemeAssetsMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (TenantCouldNotBeIdentifiedOnDomainException $e, $request) {

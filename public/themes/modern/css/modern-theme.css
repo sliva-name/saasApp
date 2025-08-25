@@ -1,0 +1,30 @@
+/* Modern Theme Styles */
+
+:root {
+    --primary-color: #6366f1;
+    --secondary-color: #f8fafc;
+    --accent-color: #06b6d4;
+    --background-color: #ffffff;
+    --text-color: #1f2937;
+    --border-color: #e5e7eb;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --border-radius: 12px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modern-theme {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Basic styles placeholder */
+.modern-theme .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* This is a minimal CSS file to prevent errors */
+/* Full modern theme styles would be implemented here */

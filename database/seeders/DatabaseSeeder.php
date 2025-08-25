@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             PlanSeeder::class,
+            ThemeSeeder::class,  // Добавляем сидер тем
             CategorySeeder::class,
             ProductSeeder::class
         ]);

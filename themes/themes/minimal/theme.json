@@ -1,0 +1,88 @@
+{
+  "name": "Minimal Theme",
+  "package_name": "themes/minimal",
+  "slug": "minimal",
+  "version": "1.0.0",
+  "author": "SaaS E-commerce Team",
+  "description": "Минималистичная тема с чистым дизайном и фокусом на контенте",
+  "entry_point": "index.js",
+  "preview_image": "/themes/minimal/preview.jpg",
+  "is_system": false,
+  "is_active": true,
+  "features": [
+    "product_catalog",
+    "product_search",
+    "shopping_cart",
+    "user_authentication",
+    "responsive_design",
+    "minimal_design",
+    "high_performance"
+  ],
+  "requirements": {
+    "php": ">=8.2",
+    "laravel": ">=11.0",
+    "vue": ">=3.3"
+  },
+  "config_schema": {
+    "colors": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "type": "string",
+          "format": "color",
+          "default": "#000000",
+          "title": "Основной цвет"
+        },
+        "secondary": {
+          "type": "string",
+          "format": "color", 
+          "default": "#666666",
+          "title": "Вторичный цвет"
+        },
+        "background": {
+          "type": "string",
+          "format": "color",
+          "default": "#ffffff",
+          "title": "Цвет фона"
+        }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "properties": {
+        "max_width": {
+          "type": "string",
+          "default": "1200px",
+          "title": "Максимальная ширина контента"
+        },
+        "spacing": {
+          "type": "string",
+          "enum": ["compact", "normal", "spacious"],
+          "default": "normal",
+          "title": "Размер отступов"
+        },
+        "show_borders": {
+          "type": "boolean",
+          "default": false,
+          "title": "Показывать границы элементов"
+        }
+      }
+    },
+    "typography": {
+      "type": "object",
+      "properties": {
+        "font_family": {
+          "type": "string",
+          "default": "system-ui, sans-serif",
+          "title": "Семейство шрифтов"
+        },
+        "font_weight": {
+          "type": "string",
+          "enum": ["300", "400", "500"],
+          "default": "400",
+          "title": "Начертание шрифта"
+        }
+      }
+    }
+  }
+}

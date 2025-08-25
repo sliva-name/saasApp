@@ -1,0 +1,85 @@
+{
+  "name": "Default Theme",
+  "package_name": "themes/default",
+  "slug": "default",
+  "version": "1.0.0",
+  "author": "SaaS E-commerce Team",
+  "description": "Системная тема по умолчанию с базовым функционалом",
+  "entry_point": "index.js",
+  "preview_image": "/themes/default/preview.jpg",
+  "is_system": true,
+  "is_active": true,
+  "features": [
+    "product_catalog",
+    "product_search",
+    "shopping_cart",
+    "user_authentication",
+    "responsive_design",
+    "basic_customization"
+  ],
+  "requirements": {
+    "php": ">=8.2",
+    "laravel": ">=11.0",
+    "vue": ">=3.3"
+  },
+  "config_schema": {
+    "colors": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "type": "string",
+          "format": "color",
+          "default": "#3b82f6",
+          "title": "Основной цвет"
+        },
+        "secondary": {
+          "type": "string",
+          "format": "color", 
+          "default": "#64748b",
+          "title": "Вторичный цвет"
+        },
+        "accent": {
+          "type": "string",
+          "format": "color",
+          "default": "#ec4899",
+          "title": "Акцентный цвет"
+        }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "properties": {
+        "header_fixed": {
+          "type": "boolean",
+          "default": true,
+          "title": "Зафиксированная шапка"
+        },
+        "sidebar_enabled": {
+          "type": "boolean",
+          "default": true,
+          "title": "Показывать боковую панель"
+        },
+        "footer_enabled": {
+          "type": "boolean",
+          "default": true,
+          "title": "Показывать футер"
+        }
+      }
+    },
+    "typography": {
+      "type": "object",
+      "properties": {
+        "font_family": {
+          "type": "string",
+          "default": "Inter, sans-serif",
+          "title": "Семейство шрифтов"
+        },
+        "font_size_base": {
+          "type": "string",
+          "default": "16px",
+          "title": "Базовый размер шрифта"
+        }
+      }
+    }
+  }
+}

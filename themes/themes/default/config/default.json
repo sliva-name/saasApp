@@ -1,0 +1,40 @@
+{
+  "colors": {
+    "primary": "#3b82f6",
+    "secondary": "#64748b",
+    "accent": "#ec4899",
+    "success": "#10b981",
+    "warning": "#f59e0b",
+    "error": "#ef4444",
+    "background": "#ffffff",
+    "surface": "#f8fafc",
+    "text": "#1e293b"
+  },
+  "layout": {
+    "header_fixed": true,
+    "sidebar_enabled": true,
+    "footer_enabled": true,
+    "container_max_width": "1280px",
+    "padding": "1rem"
+  },
+  "typography": {
+    "font_family": "Inter, sans-serif",
+    "font_size_base": "16px",
+    "font_size_small": "14px",
+    "font_size_large": "18px",
+    "font_weight_normal": "400",
+    "font_weight_medium": "500",
+    "font_weight_bold": "700"
+  },
+  "components": {
+    "button_radius": "6px",
+    "input_radius": "6px",
+    "card_radius": "8px",
+    "image_radius": "4px"
+  },
+  "animations": {
+    "transition_duration": "200ms",
+    "hover_scale": "1.02",
+    "enable_animations": true
+  }
+}

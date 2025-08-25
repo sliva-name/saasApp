@@ -1,0 +1,338 @@
+/**
+ * Minimal Theme Styles
+ * Минималистичная тема с фокусом на простоту и производительность
+ */
+
+/* Базовые переменные - монохромная палитра */
+:root {
+  /* Цвета - черно-белая гамма с акцентами */
+  --color-primary: #000000;
+  --color-primary-dark: #333333;
+  --color-secondary: #666666;
+  --color-accent: #ff0000;
+  --color-background: #ffffff;
+  --color-surface: #f9f9f9;
+  --color-border: #e5e5e5;
+  --color-text-primary: #000000;
+  --color-text-secondary: #666666;
+  --color-text-muted: #999999;
+  --color-text-light: #cccccc;
+  
+  /* Типографика - строгие шрифты */
+  --font-family-base: 'Arial', 'Helvetica', sans-serif;
+  --font-family-heading: 'Arial', 'Helvetica', sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 32px;
+  
+  /* Отступы - сетка 8px */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  
+  /* Границы - прямые углы */
+  --border-radius: 0px;
+  --border-width: 1px;
+  
+  /* Анимации - минимальные */
+  --transition-fast: 150ms;
+  --transition-normal: 300ms;
+  
+  /* Тени - отсутствуют */
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+}
+
+/* Глобальные стили для минимальной темы */
+.theme-minimal {
+  font-family: var(--font-family-base);
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+}
+
+.theme-minimal * {
+  box-sizing: border-box;
+}
+
+/* Заголовки - строгие и лаконичные */
+.theme-minimal h1,
+.theme-minimal h2,
+.theme-minimal h3,
+.theme-minimal h4,
+.theme-minimal h5,
+.theme-minimal h6 {
+  font-family: var(--font-family-heading);
+  font-weight: bold;
+  line-height: 1.2;
+  margin: 0 0 var(--spacing-md) 0;
+  color: var(--color-text-primary);
+}
+
+.theme-minimal h1 { font-size: var(--font-size-3xl); }
+.theme-minimal h2 { font-size: var(--font-size-2xl); }
+.theme-minimal h3 { font-size: var(--font-size-xl); }
+.theme-minimal h4 { font-size: var(--font-size-lg); }
+.theme-minimal h5 { font-size: var(--font-size-base); }
+.theme-minimal h6 { font-size: var(--font-size-sm); }
+
+/* Ссылки - простые подчеркивания */
+.theme-minimal a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  transition: color var(--transition-fast);
+}
+
+.theme-minimal a:hover {
+  color: var(--color-accent);
+}
+
+/* Кнопки - квадратные, без скруглений */
+.theme-minimal button,
+.theme-minimal .btn {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: normal;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.theme-minimal button:hover,
+.theme-minimal .btn:hover {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  border-color: var(--color-primary);
+}
+
+.theme-minimal .btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  border-color: var(--color-primary);
+}
+
+.theme-minimal .btn-primary:hover {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* Поля ввода - минималистичные */
+.theme-minimal input,
+.theme-minimal textarea,
+.theme-minimal select {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  padding: var(--spacing-sm);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  width: 100%;
+}
+
+.theme-minimal input:focus,
+.theme-minimal textarea:focus,
+.theme-minimal select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* Карточки продуктов - простые прямоугольники */
+.theme-minimal .product-card {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius);
+  background-color: var(--color-background);
+  transition: border-color var(--transition-fast);
+}
+
+.theme-minimal .product-card:hover {
+  border-color: var(--color-primary);
+}
+
+/* Навигация - горизонтальный список */
+.theme-minimal .navigation {
+  border-bottom: var(--border-width) solid var(--color-border);
+  background-color: var(--color-background);
+}
+
+.theme-minimal .navigation ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.theme-minimal .navigation li {
+  margin: 0;
+}
+
+.theme-minimal .navigation a {
+  display: block;
+  padding: var(--spacing-md);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  border-right: var(--border-width) solid var(--color-border);
+}
+
+.theme-minimal .navigation a:hover {
+  background-color: var(--color-surface);
+}
+
+/* Header - простая строка */
+.theme-minimal .header {
+  border-bottom: var(--border-width) solid var(--color-border);
+  background-color: var(--color-background);
+}
+
+/* Footer - простая строка */
+.theme-minimal .footer {
+  border-top: var(--border-width) solid var(--color-border);
+  background-color: var(--color-surface);
+  margin-top: var(--spacing-2xl);
+  padding: var(--spacing-lg) 0;
+}
+
+/* Сетка продуктов - простая компоновка */
+.theme-minimal .products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+}
+
+/* Поиск - простое поле */
+.theme-minimal .search-bar {
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Пагинация - простые кнопки */
+.theme-minimal .pagination {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-lg);
+}
+
+.theme-minimal .pagination button {
+  min-width: 40px;
+  text-align: center;
+}
+
+/* Фильтры - вертикальный список */
+.theme-minimal .filters {
+  border: var(--border-width) solid var(--color-border);
+  padding: var(--spacing-md);
+  background-color: var(--color-surface);
+}
+
+.theme-minimal .filters h3 {
+  margin-top: 0;
+  padding-bottom: var(--spacing-sm);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .theme-minimal .navigation ul {
+    flex-direction: column;
+  }
+  
+  .theme-minimal .navigation a {
+    border-right: none;
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+  
+  .theme-minimal .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--spacing-sm);
+  }
+}
+
+/* Состояния загрузки - простой индикатор */
+.theme-minimal .loading {
+  text-align: center;
+  padding: var(--spacing-lg);
+  color: var(--color-text-secondary);
+}
+
+.theme-minimal .loading::after {
+  content: "...";
+  animation: dots var(--transition-normal) infinite;
+}
+
+@keyframes dots {
+  0%, 20% { content: "."; }
+  40% { content: ".."; }
+  60%, 100% { content: "..."; }
+}
+
+/* Состояния ошибок */
+.theme-minimal .error {
+  color: var(--color-accent);
+  border: var(--border-width) solid var(--color-accent);
+  padding: var(--spacing-md);
+  background-color: var(--color-background);
+}
+
+/* Утилиты */
+.theme-minimal .text-center { text-align: center; }
+.theme-minimal .text-left { text-align: left; }
+.theme-minimal .text-right { text-align: right; }
+
+.theme-minimal .mt-0 { margin-top: 0; }
+.theme-minimal .mt-1 { margin-top: var(--spacing-xs); }
+.theme-minimal .mt-2 { margin-top: var(--spacing-sm); }
+.theme-minimal .mt-3 { margin-top: var(--spacing-md); }
+.theme-minimal .mt-4 { margin-top: var(--spacing-lg); }
+
+.theme-minimal .mb-0 { margin-bottom: 0; }
+.theme-minimal .mb-1 { margin-bottom: var(--spacing-xs); }
+.theme-minimal .mb-2 { margin-bottom: var(--spacing-sm); }
+.theme-minimal .mb-3 { margin-bottom: var(--spacing-md); }
+.theme-minimal .mb-4 { margin-bottom: var(--spacing-lg); }
+
+.theme-minimal .p-0 { padding: 0; }
+.theme-minimal .p-1 { padding: var(--spacing-xs); }
+.theme-minimal .p-2 { padding: var(--spacing-sm); }
+.theme-minimal .p-3 { padding: var(--spacing-md); }
+.theme-minimal .p-4 { padding: var(--spacing-lg); }
+
+/* Скрытие ненужных элементов в минимальной теме */
+.theme-minimal .hero-section,
+.theme-minimal .features-section,
+.theme-minimal .newsletter-section {
+  display: none;
+}
+
+/* Упрощение карточки продукта */
+.theme-minimal .product-card .out-of-stock-overlay,
+.theme-minimal .product-card .product-category,
+.theme-minimal .product-card .product-stock {
+  display: none;
+}
+
+.theme-minimal .product-card .product-title {
+  font-size: var(--font-size-base);
+  font-weight: normal;
+  margin-bottom: var(--spacing-sm);
+}
+
+.theme-minimal .product-card .product-price {
+  font-size: var(--font-size-lg);
+  font-weight: bold;
+  margin-bottom: var(--spacing-sm);
+}

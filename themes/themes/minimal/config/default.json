@@ -1,0 +1,34 @@
+{
+  "colors": {
+    "primary": "#000000",
+    "secondary": "#666666",
+    "accent": "#333333",
+    "background": "#ffffff",
+    "surface": "#fafafa",
+    "text": "#000000",
+    "text_light": "#666666",
+    "border": "#e0e0e0"
+  },
+  "layout": {
+    "max_width": "1200px",
+    "spacing": "normal",
+    "show_borders": false,
+    "header_minimal": true,
+    "footer_minimal": true
+  },
+  "typography": {
+    "font_family": "system-ui, -apple-system, sans-serif",
+    "font_weight": "400",
+    "font_size_base": "16px",
+    "line_height": "1.6"
+  },
+  "components": {
+    "button_style": "minimal",
+    "card_style": "clean",
+    "input_style": "borderless"
+  },
+  "animations": {
+    "enable_animations": false,
+    "transition_duration": "150ms"
+  }
+}
