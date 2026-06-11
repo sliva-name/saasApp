@@ -1,4 +1,4 @@
-FROM php:8.2-fpm
+FROM php:8.5.2-zts-alpine3.23
 
 # Установка зависимостей и bash
 RUN apt-get update && apt-get install -y \
